@@ -81,8 +81,15 @@ if __name__ == "__main__":
 
 
 
+    print("Holdout results using best fold:")
     #Run on Holdout set and report the final score on the holdout set
     predicted = [LABELS[int(a)] for a in best_fold.predict(X_holdout)]
     actual = [LABELS[int(a)] for a in y_holdout]
-
     report_score(actual,predicted)
+
+    print("Rest of folds:")
+    for i, fold in enumerate(fold_stances):
+        print("Fold {0}".format(i))
+        predicted = [LABELS[int(a)] for a in best_fold.predict(Xs[fold])]
+        actual = [LABELS[int(a)] for a in ys[fold]]
+        report_score(actual,predicted)
